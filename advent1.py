@@ -36,19 +36,18 @@ def find_repeat_2(changes: list):
         count += 1
 
 
-def apply_changes(changes, frequency_list=[]):
+def apply_changes(changes, starting_freq=0,  frequency_list=[0]):
     freqs = frequency_list
-
-    if not freqs:
-        freqs.append(0)
-        freq = 0
-    else:
-        freq = freqs[-1]
+    freq = starting_freq
 
     for change in changes:
         freq = freq + int(change)
-        freqs.append(freq)
-    return freqs
+        if freq not in freqs:
+            freqs.append(freq)
+        else:
+            print(f'Frequency {freq} is a repeat')
+            return freq, freqs
+    return freq, freqs
 
 
 def file_to_list():
