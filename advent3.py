@@ -27,7 +27,7 @@ def place_items(items):
         height = int(item[4])
 
         if np.all(big_fabric[x : x + width, y : y + height] == 1):
-            idn = item_id
+            idn = int(item_id)
 
     return area_covered, idn
 
@@ -47,6 +47,8 @@ test_claims = [
 
 x, y = place_items(parse_claims(test_claims))
 print(x, y)
+assert x == 4
+assert y == 3
 
 
 print(place_items(parse_claims(elf_claims)))
