@@ -18,7 +18,18 @@ def place_items(items):
         big_fabric[x : x + width, y : y + height] += 1
     area_covered = len(big_fabric[np.where(big_fabric > 1)])
 
-    return area_covered
+    idn = -1
+    for item in items:
+        item_id = item[0]
+        x = int(item[1])
+        y = int(item[2])
+        width = int(item[3])
+        height = int(item[4])
+
+        if np.all(big_fabric[x : x + width, y : y + height] == 1):
+            idn = item_id
+
+    return area_covered, idn
 
 
 def parse_claims(claims):
@@ -34,7 +45,9 @@ test_claims = [
     '#3 @ 5,5: 2x2'
 ]
 
-assert (place_items(parse_claims(test_claims))) == 4
+x, y = place_items(parse_claims(test_claims))
+print(x, y)
+
 
 print(place_items(parse_claims(elf_claims)))
 
