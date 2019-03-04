@@ -8,15 +8,15 @@ with open('input3.txt') as f:
 
 
 def place_items(items):
-    big_fabric = np.zeros((10, 10))
+    big_fabric = np.zeros((10000, 10000))
     for item in items:
         x = int(item[1])
         y = int(item[2])
         width = int(item[3])
         height = int(item[4])
 
-        big_fabric[x : x + width][y : y + height] += 1
-    area_covered = np.sum(big_fabric>1)
+        big_fabric[x : x + width, y : y + height] += 1
+    area_covered = len(big_fabric[np.where(big_fabric > 1)])
 
     return area_covered
 
@@ -34,12 +34,9 @@ test_claims = [
     '#3 @ 5,5: 2x2'
 ]
 
+assert (place_items(parse_claims(test_claims))) == 4
 
-things = parse_claims(test_claims)
-print(things)
-print(place_items(things))
-
-
+print(place_items(parse_claims(elf_claims)))
 
 
 
